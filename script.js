@@ -16,40 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Change image every 3 seconds
     setInterval(showNextImage, 3000);
 
-    // YouTube Player API
-    let player;
     const playMusicButton = document.getElementById('playMusicButton');
+    const backgroundMusic = document.getElementById('backgroundMusic');
 
-    // Load the IFrame Player API code asynchronously.
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player('youtubePlayer', {
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
+    if (playMusicButton && backgroundMusic) {
+        playMusicButton.addEventListener('click', () => {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                playMusicButton.textContent = 'إيقاف الموسيقى'; // Pause music
+            } else {
+                backgroundMusic.pause();
+                playMusicButton.textContent = 'تشغيل الموسيقى'; // Play music
             }
         });
-    }
-
-    function onPlayerReady(event) {
-        if (playMusicButton) {
-            playMusicButton.addEventListener('click', () => {
-                event.target.playVideo();
-                playMusicButton.style.display = 'none'; // Hide button after click
-            });
-        }
-    }
-
-    function onPlayerStateChange(event) {
-        // Loop the video when it ends
-        if (event.data === YT.PlayerState.ENDED) {
-            player.seekTo(0);
-            player.playVideo();
-        }
     }
 
     // Confetti animation
@@ -72,4 +51,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Continuously create confetti
     setInterval(createConfetti, 200); // Create a new confetti every 200ms
+
+    // Falling Petals animation
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        const colors = ['#ffc0cb', '#ffe0b2', '#e0b2ff']; // Colors from CSS
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = Math.random() * 5 + 5 + 's'; // 5 to 10 seconds
+        petal.style.animationDelay = Math.random() * 2 + 's';
+        petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        petal.style.opacity = Math.random() * 0.6 + 0.2; // 0.2 to 0.8 opacity
+        petal.style.setProperty('--x-end', (Math.random() * 200 - 100)); // Random horizontal drift
+        document.body.appendChild(petal);
+
+        petal.addEventListener('animationend', () => {
+            petal.remove();
+        });
+    }
+
+    // Continuously create petals
+    setInterval(createPetal, 500); // Create a new petal every 500ms
 });

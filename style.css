@@ -360,3 +360,33 @@ p:hover {
     50% { transform: rotate(47deg); }
     100% { transform: rotate(45deg); }
 }
+
+/* Falling Petals/Glitter */
+.petal {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #ffc0cb; /* Light pink */
+    border-radius: 50%;
+    opacity: 0;
+    animation: fallAndFade 10s linear infinite;
+    z-index: 0;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.petal:nth-child(2n) { background-color: #ffe0b2; /* Light orange/peach */ }
+.petal:nth-child(3n) { background-color: #e0b2ff; /* Light purple */ }
+
+@keyframes fallAndFade {
+    0% {
+        transform: translate(0, -100px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(calc(var(--x-end) * 1vw), 100vh) rotate(720deg);
+        opacity: 0;
+    }
+}

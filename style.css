@@ -1,185 +1,188 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-/* Universal box-sizing for consistent layout */
-*, *::before, *::after {
-    box-sizing: border-box;
+:root {
+    --primary-color: #ff69b4; /* Hot Pink */
+    --secondary-color: #ffc0cb; /* Light Pink */
+    --accent-color: #ffd700; /* Gold */
+    --text-color: #333;
+    --light-text-color: #fff;
+    --background-gradient-start: #fce4ec; /* Lighter Pink */
+    --background-gradient-end: #f8bbd0; /* Slightly Darker Pink */
 }
 
-html, body {
-    width: 100vw; /* Ensure it takes full viewport width */
-    height: 100vh; /* Ensure it takes full viewport height */
-    overflow-x: hidden; /* Ensure no horizontal scroll */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: 'Playfair Display', serif;
-    background: linear-gradient(135deg, #fce4ec 0%, #ffcdd2 100%); /* Soft pink gradient */
-    color: #4a4a4a;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    direction: rtl; /* Right-to-left for Arabic text */
-    text-align: right;
-    padding: 20px;
-    box-sizing: border-box;
+    color: var(--text-color);
+    overflow: hidden; /* Hide overflow for animations */
     position: relative;
-    background-size: 200% 200%;
-    animation: gradientAnimation 15s ease infinite;
-    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOS4yNCAyIDcgNC4yNCA3IDdDNyAxMC4yNSAxMiAxNyAxMiAxN0MxMiAxNyAxNyAxMC4yNSAxNyA3QTE0LjUgMTQuNSAwIDAgMCAxMiAyWiIgZmlsbD0iI2ZmNjliNCIvPgo8L3N2Zz4=') 12 12, auto; /* Custom heart cursor */
-    left: 0; /* Ensure body starts at left edge */
-    right: 0; /* Ensure body ends at right edge */
-}
-
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iMjUiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9zdmc+'); /* Subtle circle pattern overlay */
-    background-size: 50px;
-    opacity: 0.3;
-    z-index: 0;
-    animation: backgroundPulse 5s infinite alternate;
-}
-
-@keyframes backgroundPulse {
-    0% { opacity: 0.3; transform: scale(1); }
-    100% { opacity: 0.5; transform: scale(1.02); }
-}
-
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 .container {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 40px;
-    border-radius: 25px; /* More rounded corners */
-    box-shadow: 0 8px 15px rgba(255, 105, 180, 0.2); /* Reduced shadow for performance */
-    max-width: 850px; /* Slightly reduced max-width to give more horizontal space */
-    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     text-align: center;
+    max-width: 800px;
+    width: 90%;
     position: relative;
-    overflow: hidden;
-    border: 3px solid #ffb6c1; /* Light pink border */
-    z-index: 1; /* Ensure container is above confetti */
-    animation: borderPulse 2s infinite alternate;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIyIiBmaWxsPSIjZmZjZGVhIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjwvc3ZnPg=='); /* Subtle dot pattern */
-    background-size: 20px;
-    margin: 0 auto; /* Center the container */
+    z-index: 10; /* Ensure container is above animations */
+    overflow-y: auto; /* Enable scrolling for long content */
+    max-height: 90vh; /* Limit height to prevent overflow */
 }
 
-@keyframes borderPulse {
-    0% { border-color: #ffb6c1; box-shadow: 0 8px 15px rgba(255, 105, 180, 0.2); }
-    100% { border-color: #ff80ab; box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3); } /* Reduced shadow for performance */
+.ribbon {
+    position: absolute;
+    top: -25px; /* Slightly higher */
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg); /* Slight rotation for modern feel */
+    background: linear-gradient(45deg, var(--primary-color), #ff85c1); /* Gradient background */
+    padding: 12px 35px; /* More padding */
+    border-radius: 10px; /* Slightly more rounded */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+    z-index: 1;
+    animation: bounceIn 1s ease-out forwards; /* Keep final state */
+    border: 2px solid var(--accent-color); /* Gold border */
+}
+
+.ribbon-content {
+    color: var(--light-text-color);
+    font-size: 2em; /* Larger font */
+    font-weight: 800; /* Bolder font */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spaced out letters */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
+    font-family: 'Cairo', sans-serif; /* Ensure Cairo font */
 }
 
 h1 {
-    color: #e91e63; /* Deep pink for heading */
+    color: var(--primary-color);
+    font-size: 2.8em;
     margin-bottom: 20px;
-    font-size: 3.8em; /* Even larger heading */
-    line-height: 1.2; /* Increased line height for better emoji display */
-    position: relative;
     animation: fadeInDown 1s ease-out;
-    font-family: 'Dancing Script', cursive; /* Playful and elegant font */
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
-    letter-spacing: 2px;
-    display: inline-block; /* Ensure proper box model for emojis */
-    padding: 5px 10px; /* Add some padding around the text and emojis */
-    vertical-align: middle; /* Align text and emojis vertically */
+    padding-top: 30px; /* Space for the ribbon */
+}
+
+.birthday-girl-name {
+    color: var(--accent-color);
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
 }
 
 p {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2em; /* Slightly larger text */
-    line-height: 1.8;
+    font-size: 1.1em;
+    line-height: 1.6;
     margin-bottom: 15px;
     animation: fadeInUp 1s ease-out;
-    animation-delay: 0.5s;
-    color: #5a5a5a;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-p:hover {
-    transform: translateX(5px);
-    color: #ff4081; /* Highlight on hover */
 }
 
 .image-gallery {
-    position: relative;
-    width: 100%;
-    height: 400px; /* Fixed height for slideshow */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
     margin-top: 30px;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 1.5s ease-out;
 }
 
 .image-gallery img {
-    position: absolute;
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%) rotate(2deg); /* Center and slight rotation */
     width: 100%;
-    height: 100%;
+    height: 150px;
     object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out, transform 0.5s ease; /* Fade and transform transition */
-    border: 6px solid #ff80ab; /* Brighter pink border */
-    border-radius: 20px; /* More rounded corners */
-    box-shadow: 0 12px 25px rgba(255, 105, 180, 0.5); /* More prominent pinkish shadow */
-    animation: imagePop 0.5s ease-out forwards;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.image-gallery img.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.05) rotate(2deg); /* Subtle zoom on active image */
+.image-gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes imagePop {
-    from {
-        transform: translate(-50%, -50%) scale(0.9) rotate(0deg);
-        opacity: 0;
-    }
-    to {
-        transform: translate(-50%, -50%) scale(1) rotate(2deg);
-        opacity: 1;
-    }
+.music-button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.image-gallery img.active {
-    opacity: 1;
+.music-button:hover {
+    background-color: darken(var(--accent-color), 10%);
+    transform: translateY(-2px);
 }
 
-/* Confetti styles */
-.confetti {
+/* Balloon Animation */
+.balloon {
     position: absolute;
-    width: 12px;
-    height: 12px;
-    background-color: #ff69b4; /* Pink */
-    opacity: 0;
-    animation: confetti-fall 4s forwards; /* Longer animation */
-    border-radius: 50%; /* Make them round */
-    z-index: 0; /* Ensure confetti is behind the container */
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    /* Removed filter: blur for performance */
+    width: 80px;
+    height: 100px;
+    background-color: var(--primary-color);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.7;
+    animation: floatUp 10s infinite ease-in-out;
+    z-index: 1;
 }
 
-.confetti:nth-child(2n) { background-color: #ffd700; /* Gold */ transform: rotate(15deg); }
-.confetti:nth-child(3n) { background-color: #ffb6c1; /* Light Pink */ transform: rotate(-10deg); }
-.confetti:nth-child(4n) { background-color: #dda0dd; /* Plum */ transform: rotate(20deg); }
-.confetti:nth-child(5n) { background-color: #ffebcd; /* Blanched Almond */ transform: rotate(-5deg); }
-.confetti:nth-child(6n) { background-color: #ff80ab; /* Brighter Pink */ transform: rotate(25deg); }
-.confetti:nth-child(7n) { background-color: #c0ffee; /* Mint Green */ transform: rotate(-15deg); }
+.balloon:nth-child(1) { left: 10%; top: 100%; background-color: var(--secondary-color); animation-delay: 0s; }
+.balloon:nth-child(2) { left: 25%; top: 110%; background-color: var(--primary-color); animation-delay: 2s; }
+.balloon:nth-child(3) { left: 40%; top: 120%; background-color: var(--accent-color); animation-delay: 4s; }
+.balloon:nth-child(4) { left: 60%; top: 105%; background-color: var(--secondary-color); animation-delay: 6s; }
+.balloon:nth-child(5) { left: 80%; top: 115%; background-color: var(--primary-color); animation-delay: 8s; }
 
-/* Animations */
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-500px) rotate(10deg); opacity: 0.5; }
+    100% { transform: translateY(-1000px) rotate(-10deg); opacity: 0; }
+}
+
+/* Petal Animation */
+.petal {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: fall 15s infinite linear;
+    z-index: 0;
+}
+
+.petal:nth-child(6) { left: 5%; top: -10%; background-color: #f8bbd0; animation-delay: 0s; }
+.petal:nth-child(7) { left: 15%; top: -20%; background-color: #ffc0cb; animation-delay: 1.5s; }
+.petal:nth-child(8) { left: 25%; top: -5%; background-color: #fce4ec; animation-delay: 3s; }
+.petal:nth-child(9) { left: 35%; top: -25%; background-color: #ffc0cb; animation-delay: 4.5s; }
+.petal:nth-child(10) { left: 45%; top: -15%; background-color: #f8bbd0; animation-delay: 6s; }
+.petal:nth-child(11) { left: 55%; top: -30%; background-color: #fce4ec; animation-delay: 7.5s; }
+.petal:nth-child(12) { left: 65%; top: -10%; background-color: #ffc0cb; animation-delay: 9s; }
+.petal:nth-child(13) { left: 75%; top: -20%; background-color: #f8bbd0; animation-delay: 10.5s; }
+.petal:nth-child(14) { left: 85%; top: -5%; background-color: #fce4ec; animation-delay: 12s; }
+.petal:nth-child(15) { left: 95%; top: -25%; background-color: #ffc0cb; animation-delay: 13.5s; }
+
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Keyframe Animations */
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -189,31 +192,6 @@ p:hover {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.music-button {
-    background-color: #ff4081; /* Brighter pink button */
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 35px;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-top: 30px;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 8px 15px rgba(255, 64, 129, 0.4);
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.music-button:hover {
-    background-color: #e91e63; /* Even darker pink on hover */
-    transform: translateY(-3px);
-    box-shadow: 0 12px 20px rgba(255, 64, 129, 0.5);
-}
-
-.music-button:active {
-    transform: translateY(0);
 }
 
 @keyframes fadeInUp {
@@ -227,15 +205,51 @@ p:hover {
     }
 }
 
-@keyframes confetti-fall {
-    0% {
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
         opacity: 1;
-        transform: translateY(-100px) rotateZ(0deg) scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+    0% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3) translateX(-50%);
+    }
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1) translateX(-50%);
+    }
+    40% {
+        transform: scale3d(.9, .9, .9) translateX(-50%);
+    }
+    60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03) translateX(-50%);
+    }
+    80% {
+        transform: scale3d(.97, .97, .97) translateX(-50%);
     }
     100% {
-        opacity: 0;
-        transform: translateY(100vh) rotateZ(720deg) scale(0.5);
-        /* Removed filter: blur for performance */
+        opacity: 1;
+        transform: scale3d(1, 1, 1) translateX(-50%);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 
@@ -243,11 +257,22 @@ p:hover {
 @media (max-width: 768px) {
     .container {
         padding: 20px;
-        border-radius: 15px;
+        width: 95%; /* Slightly wider on tablets */
+        max-height: 95vh; /* Adjust max height */
     }
 
     h1 {
-        font-size: 2.2em;
+        font-size: 2.2em; /* Slightly larger for better readability */
+    }
+
+    .ribbon {
+        top: -15px; /* Adjust ribbon position */
+        padding: 10px 25px;
+        transform: translateX(-50%) rotate(-2deg); /* Less rotation */
+    }
+
+    .ribbon-content {
+        font-size: 1.6em; /* Adjust font size */
     }
 
     p {
@@ -255,186 +280,90 @@ p:hover {
     }
 
     .image-gallery {
-        height: 250px;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust image size */
+        gap: 10px;
     }
 
-    /* Reduce animations on smaller screens for stability */
-    body::before,
-    .balloon,
-    .petal,
-    .confetti,
-    .ribbon-content,
+    .image-gallery img {
+        height: 120px;
+    }
+
+    .music-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        align-items: flex-start; /* Align content to top on small screens */
+        padding-top: 20px; /* Add some top padding */
+    }
+
+    .container {
+        padding: 15px;
+        width: 95%; /* Maximize width on small phones */
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-height: 98vh; /* Allow more height for content */
+    }
+
+    .ribbon {
+        top: -10px; /* Further adjust ribbon position */
+        padding: 8px 20px;
+        transform: translateX(-50%) rotate(-1deg); /* Even less rotation */
+        border-width: 1px; /* Thinner border */
+    }
+
+    .ribbon-content {
+        font-size: 1.3em; /* Smaller font for very small screens */
+        letter-spacing: 1px; /* Less letter spacing */
+    }
+
+    h1 {
+        font-size: 1.8em; /* Smaller heading */
+        margin-bottom: 15px;
+        padding-top: 20px;
+    }
+
     .birthday-girl-name {
-        animation-duration: 0s !important; /* Disable animations */
-        animation: none !important;
+        font-size: 1.1em; /* Adjust name font size */
     }
 
-    .birthday-girl-name:hover {
-        text-shadow: none; /* Disable hover glow */
+    p {
+        font-size: 0.9em; /* Smaller paragraph text */
+        margin-bottom: 10px;
     }
-}
 
-.birthday-girl-name {
-    color: #ffd700; /* Gold color for the name */
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.2em; /* Slightly larger than surrounding text */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    display: inline-block;
-    animation: pulse 1.5s infinite alternate, sparkle 1s infinite alternate;
-    transition: text-shadow 0.3s ease;
-}
-
-.birthday-girl-name:hover {
-    text-shadow: 0 0 10px rgba(255,215,0,0.7), 0 0 15px rgba(255,215,0,0.5); /* Reduced glow for performance */
-}
-
-@keyframes sparkle {
-    0% { text-shadow: 0 0 5px rgba(255,215,0,0.5); }
-    50% { text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 20px rgba(255,215,0,0.7); }
-    100% { text-shadow: 0 0 5px rgba(255,215,0,0.5); }
-}
-
-@keyframes pulse {
-    from {
-        transform: scale(1);
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    .image-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Smaller images */
+        gap: 8px;
+        margin-top: 20px;
     }
-    to {
-        transform: scale(1.05);
-        text-shadow: 0 0 10px rgba(255,193,7,0.7);
+
+    .image-gallery img {
+        height: 80px;
+        border-radius: 8px;
     }
-}
 
-/* Ribbon effect */
-.ribbon {
-    position: absolute;
-    top: -20px; /* Adjust top to hide part of the ribbon */
-    right: -100px; /* Increased value to ensure it's off-screen */
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    z-index: 2; /* Ensure it's above other elements */
-    transform-origin: 100% 0%; /* Set transform origin to top-right */
-    pointer-events: none; /* Prevent ribbon from interfering with clicks/scrolls */
-}
-
-.ribbon::before,
-.ribbon::after {
-    content: '';
-    position: absolute;
-    display: block;
-    border-style: solid;
-    border-color: transparent;
-}
-
-.ribbon::before {
-    border-width: 0 0 20px 20px;
-    border-bottom-color: #e91e63; /* Darker pink */
-    top: 0;
-    left: 0;
-}
-
-.ribbon::after {
-    border-width: 20px 20px 0 0;
-    border-top-color: #e91e63; /* Darker pink */
-    bottom: 0;
-    right: 0;
-}
-
-.ribbon-content {
-    position: absolute;
-    top: 70px; /* Adjust top relative to the new ribbon position */
-    right: 0; /* Position relative to the ribbon container */
-    width: 200px;
-    background-color: #ff4081; /* Brighter pink */
-    color: white;
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.5em;
-    text-align: center;
-    padding: 5px 0;
-    transform: rotate(45deg);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    animation: ribbonWiggle 2s infinite alternate;
-    transform-origin: 100% 0%; /* Set transform origin to top-right for consistency with ribbon */
-}
-
-/* Floating Balloons */
-.balloon {
-    position: absolute;
-    width: 60px;
-    height: 80px;
-    background-color: #ff69b4; /* Pink */
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    bottom: -100px; /* Start off-screen */
-    opacity: 0.8;
-    animation: floatUp 10s ease-in forwards infinite;
-    z-index: 0;
-    left: calc(50% - 30px); /* Center horizontally by default */
-    pointer-events: none; /* Prevent balloons from interfering with clicks/scrolls */
-}
-
-.balloon::before {
-    content: '';
-    position: absolute;
-    width: 2px;
-    height: 40px;
-    background-color: rgba(0,0,0,0.2);
-    bottom: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.balloon:nth-child(2n) { background-color: #ffd700; /* Gold */ animation-delay: 2s; left: 20%; }
-.balloon:nth-child(3n) { background-color: #ffb6c1; /* Light Pink */ animation-delay: 4s; left: 40%; }
-.balloon:nth-child(4n) { background-color: #dda0dd; /* Plum */ animation-delay: 6s; left: 60%; }
-.balloon:nth-child(5n) { background-color: #c0ffee; /* Mint Green */ animation-delay: 8s; left: 80%; }
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.8;
+    .music-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: 20px;
     }
-    100% {
-        transform: translateY(-120vh) rotate(10deg);
-        opacity: 0;
+
+    /* Adjust balloon and petal animations for less distraction on mobile */
+    .balloon {
+        width: 60px;
+        height: 75px;
+        opacity: 0.5;
+        animation-duration: 15s; /* Slower animation */
     }
-}
 
-@keyframes ribbonWiggle {
-    0% { transform: rotate(45deg); }
-    50% { transform: rotate(47deg); }
-    100% { transform: rotate(45deg); }
-}
-
-/* Falling Petals/Glitter */
-.petal {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background-color: #ffc0cb; /* Light pink */
-    border-radius: 50%;
-    opacity: 0;
-    animation: fallAndFade 10s linear infinite;
-    z-index: 0;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    left: calc(50% - 7.5px); /* Center horizontally by default */
-    pointer-events: none; /* Prevent petals from interfering with clicks/scrolls */
-}
-
-.petal:nth-child(2n) { background-color: #ffe0b2; /* Light orange/peach */ }
-.petal:nth-child(3n) { background-color: #e0b2ff; /* Light purple */ }
-
-@keyframes fallAndFade {
-    0% {
-        transform: translate(0, -100px) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translate(calc(var(--x-end) * 1vw), 100vh) rotate(720deg);
-        opacity: 0;
+    .petal {
+        width: 15px;
+        height: 15px;
+        opacity: 0.4;
+        animation-duration: 20s; /* Slower animation */
     }
 }

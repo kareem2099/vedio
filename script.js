@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Continuously create confetti
-    setInterval(createConfetti, 200); // Create a new confetti every 200ms
+    setInterval(createConfetti, 500); // Reduced frequency to every 500ms for stability
 
     // Falling Petals animation
     function createPetal() {
@@ -58,11 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
         petal.classList.add('petal');
         const colors = ['#ffc0cb', '#ffe0b2', '#e0b2ff']; // Colors from CSS
         petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = Math.random() * 5 + 5 + 's'; // 5 to 10 seconds
-        petal.style.animationDelay = Math.random() * 2 + 's';
+        petal.style.animationDuration = Math.random() * 5 + 7 + 's'; // Longer duration: 7 to 12 seconds
+        petal.style.animationDelay = Math.random() * 3 + 's'; // Increased delay for more staggered appearance
         petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        petal.style.opacity = Math.random() * 0.6 + 0.2; // 0.2 to 0.8 opacity
-        petal.style.setProperty('--x-end', (Math.random() * 200 - 100)); // Random horizontal drift
+        petal.style.opacity = Math.random() * 0.5 + 0.1; // More subtle opacity: 0.1 to 0.6
+        petal.style.transform = `scale(${Math.random() * 0.6 + 0.2})`; // Smaller scale: 0.2 to 0.8
+        petal.style.setProperty('--x-end', (Math.random() * 100 - 50)); // Reduced horizontal drift
         document.body.appendChild(petal);
 
         petal.addEventListener('animationend', () => {
@@ -71,5 +72,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Continuously create petals
-    setInterval(createPetal, 500); // Create a new petal every 500ms
+    setInterval(createPetal, 1000); // Reduced frequency to every 1000ms for stability
 });

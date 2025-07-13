@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
 
+/* Universal box-sizing for consistent layout */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100vw; /* Ensure it takes full viewport width */
+    height: 100vh; /* Ensure it takes full viewport height */
+    overflow-x: hidden; /* Ensure no horizontal scroll */
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Playfair Display', serif;
     background: linear-gradient(135deg, #fce4ec 0%, #ffcdd2 100%); /* Soft pink gradient */
@@ -8,15 +21,16 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
     direction: rtl; /* Right-to-left for Arabic text */
     text-align: right;
     padding: 20px;
     box-sizing: border-box;
-    overflow-x: hidden; /* Prevent horizontal scroll due to confetti */
     position: relative;
     background-size: 200% 200%;
     animation: gradientAnimation 15s ease infinite;
+    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDOS4yNCAyIDcgNC4yNCA3IDdDNyAxMC4yNSAxMiAxNyAxMiAxN0MxMiAxNyAxNyAxMC4yNSAxNyA3QTE0LjUgMTQuNSAwIDAgMCAxMiAyWiIgZmlsbD0iI2ZmNjliNCIvPgo8L3N2Zz4=') 12 12, auto; /* Custom heart cursor */
+    left: 0; /* Ensure body starts at left edge */
+    right: 0; /* Ensure body ends at right edge */
 }
 
 body::before {
@@ -48,8 +62,8 @@ body::before {
     background-color: #fff;
     padding: 40px;
     border-radius: 25px; /* More rounded corners */
-    box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2); /* Pinkish shadow */
-    max-width: 900px;
+    box-shadow: 0 8px 15px rgba(255, 105, 180, 0.2); /* Reduced shadow for performance */
+    max-width: 850px; /* Slightly reduced max-width to give more horizontal space */
     width: 100%;
     text-align: center;
     position: relative;
@@ -59,11 +73,12 @@ body::before {
     animation: borderPulse 2s infinite alternate;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIyIiBmaWxsPSIjZmZjZGVhIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjwvc3ZnPg=='); /* Subtle dot pattern */
     background-size: 20px;
+    margin: 0 auto; /* Center the container */
 }
 
 @keyframes borderPulse {
-    0% { border-color: #ffb6c1; box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2); }
-    100% { border-color: #ff80ab; box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4); }
+    0% { border-color: #ffb6c1; box-shadow: 0 8px 15px rgba(255, 105, 180, 0.2); }
+    100% { border-color: #ff80ab; box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3); } /* Reduced shadow for performance */
 }
 
 h1 {
@@ -123,6 +138,11 @@ p:hover {
     animation: imagePop 0.5s ease-out forwards;
 }
 
+.image-gallery img.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05) rotate(2deg); /* Subtle zoom on active image */
+}
+
 @keyframes imagePop {
     from {
         transform: translate(-50%, -50%) scale(0.9) rotate(0deg);
@@ -149,7 +169,7 @@ p:hover {
     border-radius: 50%; /* Make them round */
     z-index: 0; /* Ensure confetti is behind the container */
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    filter: blur(0.5px); /* Subtle blur for depth */
+    /* Removed filter: blur for performance */
 }
 
 .confetti:nth-child(2n) { background-color: #ffd700; /* Gold */ transform: rotate(15deg); }
@@ -215,7 +235,7 @@ p:hover {
     100% {
         opacity: 0;
         transform: translateY(100vh) rotateZ(720deg) scale(0.5);
-        filter: blur(2px);
+        /* Removed filter: blur for performance */
     }
 }
 
@@ -237,6 +257,21 @@ p:hover {
     .image-gallery {
         height: 250px;
     }
+
+    /* Reduce animations on smaller screens for stability */
+    body::before,
+    .balloon,
+    .petal,
+    .confetti,
+    .ribbon-content,
+    .birthday-girl-name {
+        animation-duration: 0s !important; /* Disable animations */
+        animation: none !important;
+    }
+
+    .birthday-girl-name:hover {
+        text-shadow: none; /* Disable hover glow */
+    }
 }
 
 .birthday-girl-name {
@@ -246,6 +281,11 @@ p:hover {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     display: inline-block;
     animation: pulse 1.5s infinite alternate, sparkle 1s infinite alternate;
+    transition: text-shadow 0.3s ease;
+}
+
+.birthday-girl-name:hover {
+    text-shadow: 0 0 10px rgba(255,215,0,0.7), 0 0 15px rgba(255,215,0,0.5); /* Reduced glow for performance */
 }
 
 @keyframes sparkle {
@@ -268,11 +308,14 @@ p:hover {
 /* Ribbon effect */
 .ribbon {
     position: absolute;
-    top: 0;
-    right: 20px;
+    top: -20px; /* Adjust top to hide part of the ribbon */
+    right: -100px; /* Increased value to ensure it's off-screen */
     width: 150px;
     height: 150px;
     overflow: hidden;
+    z-index: 2; /* Ensure it's above other elements */
+    transform-origin: 100% 0%; /* Set transform origin to top-right */
+    pointer-events: none; /* Prevent ribbon from interfering with clicks/scrolls */
 }
 
 .ribbon::before,
@@ -300,8 +343,8 @@ p:hover {
 
 .ribbon-content {
     position: absolute;
-    top: 20px;
-    right: -50px;
+    top: 70px; /* Adjust top relative to the new ribbon position */
+    right: 0; /* Position relative to the ribbon container */
     width: 200px;
     background-color: #ff4081; /* Brighter pink */
     color: white;
@@ -313,6 +356,7 @@ p:hover {
     box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     animation: ribbonWiggle 2s infinite alternate;
+    transform-origin: 100% 0%; /* Set transform origin to top-right for consistency with ribbon */
 }
 
 /* Floating Balloons */
@@ -326,6 +370,8 @@ p:hover {
     opacity: 0.8;
     animation: floatUp 10s ease-in forwards infinite;
     z-index: 0;
+    left: calc(50% - 30px); /* Center horizontally by default */
+    pointer-events: none; /* Prevent balloons from interfering with clicks/scrolls */
 }
 
 .balloon::before {
@@ -339,10 +385,10 @@ p:hover {
     transform: translateX(-50%);
 }
 
-.balloon:nth-child(2n) { background-color: #ffd700; /* Gold */ animation-delay: 2s; left: 10%; }
-.balloon:nth-child(3n) { background-color: #ffb6c1; /* Light Pink */ animation-delay: 4s; left: 30%; }
-.balloon:nth-child(4n) { background-color: #dda0dd; /* Plum */ animation-delay: 6s; left: 50%; }
-.balloon:nth-child(5n) { background-color: #c0ffee; /* Mint Green */ animation-delay: 8s; left: 70%; }
+.balloon:nth-child(2n) { background-color: #ffd700; /* Gold */ animation-delay: 2s; left: 20%; }
+.balloon:nth-child(3n) { background-color: #ffb6c1; /* Light Pink */ animation-delay: 4s; left: 40%; }
+.balloon:nth-child(4n) { background-color: #dda0dd; /* Plum */ animation-delay: 6s; left: 60%; }
+.balloon:nth-child(5n) { background-color: #c0ffee; /* Mint Green */ animation-delay: 8s; left: 80%; }
 
 @keyframes floatUp {
     0% {
@@ -372,6 +418,8 @@ p:hover {
     animation: fallAndFade 10s linear infinite;
     z-index: 0;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    left: calc(50% - 7.5px); /* Center horizontally by default */
+    pointer-events: none; /* Prevent petals from interfering with clicks/scrolls */
 }
 
 .petal:nth-child(2n) { background-color: #ffe0b2; /* Light orange/peach */ }

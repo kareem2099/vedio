@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عيد ميلاد سعيد</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <div class="balloon"></div>
@@ -61,8 +62,30 @@
             <img src="images/image9.jpg" alt="Birthday Image 10">
         </div>
         <button id="playMusicButton" class="music-button">تشغيل الموسيقى</button>
+        <button id="playVideoButton" class="video-button">مشاهدة رسالة الفيديو</button>
+        <p class="signature">صديقتك تمارا</p>
+    </div>
+
+    <!-- Video Message Modal -->
+    <div id="videoModal" class="video-modal">
+        <span class="video-close-btn">&times;</span>
+        <video id="birthdayVideo" controls>
+            <source src="images/VID-20250713-WA0087.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
     <audio id="backgroundMusic" src="voice1.mp3" loop preload="auto"></audio>
+    
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-btn">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="">
+            <a class="prev-btn">&#10094;</a>
+            <a class="next-btn">&#10095;</a>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

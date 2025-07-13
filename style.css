@@ -30,10 +30,10 @@ body {
 
 .container {
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 40px;
+    padding: 40px 40px 40px 150px; /* Significantly increased left padding for ribbon */
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    text-align: center;
+    text-align: left; /* Align content to the left */
     max-width: 800px;
     width: 90%;
     position: relative;
@@ -44,16 +44,17 @@ body {
 
 .ribbon {
     position: absolute;
-    top: -25px; /* Slightly higher */
-    left: 50%;
-    transform: translateX(-50%) rotate(-3deg); /* Slight rotation for modern feel */
+    top: 20px; /* Position from the top */
+    left: 0; /* Position at the left edge of the container's padding */
+    transform: translateX(0) rotate(-5deg); /* No initial translateX, animation will handle it */
     background: linear-gradient(45deg, var(--primary-color), #ff85c1); /* Gradient background */
     padding: 12px 35px; /* More padding */
-    border-radius: 10px; /* Slightly more rounded */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+    border-radius: 0 10px 10px 0; /* Rounded only on the right side */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25); /* Shadow for depth */
     z-index: 1;
-    animation: bounceIn 1s ease-out forwards; /* Keep final state */
+    animation: slideInRibbon 1s ease-out forwards; /* New animation for sliding in */
     border: 2px solid var(--accent-color); /* Gold border */
+    border-left: none; /* No border on the left */
 }
 
 .ribbon-content {
@@ -64,6 +65,8 @@ body {
     letter-spacing: 2px; /* Spaced out letters */
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
     font-family: 'Cairo', sans-serif; /* Ensure Cairo font */
+    text-align: left; /* Align text to the left within the ribbon */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 h1 {
@@ -72,6 +75,8 @@ h1 {
     margin-bottom: 20px;
     animation: fadeInDown 1s ease-out;
     padding-top: 30px; /* Space for the ribbon */
+    /* Removed padding-left here as container padding will handle it */
+    text-align: left; /* Align text to the left */
 }
 
 .birthday-girl-name {
@@ -86,6 +91,7 @@ p {
     line-height: 1.6;
     margin-bottom: 15px;
     animation: fadeInUp 1s ease-out;
+    text-align: left; /* Align text to the left */
 }
 
 .image-gallery {
@@ -220,24 +226,35 @@ p {
     }
     0% {
         opacity: 0;
-        transform: scale3d(.3, .3, .3) translateX(-50%);
+        transform: scale3d(.3, .3, .3) rotate(-3deg);
     }
     20% {
-        transform: scale3d(1.1, 1.1, 1.1) translateX(-50%);
+        transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
     }
     40% {
-        transform: scale3d(.9, .9, .9) translateX(-50%);
+        transform: scale3d(.9, .9, .9) rotate(-3deg);
     }
     60% {
         opacity: 1;
-        transform: scale3d(1.03, 1.03, 1.03) translateX(-50%);
+        transform: scale3d(1.03, 1.03, 1.03) rotate(-3deg);
     }
     80% {
-        transform: scale3d(.97, .97, .97) translateX(-50%);
+        transform: scale3d(.97, .97, .97) rotate(-3deg);
     }
     100% {
         opacity: 1;
-        transform: scale3d(1, 1, 1) translateX(-50%);
+        transform: scale3d(1, 1, 1) rotate(-3deg);
+    }
+}
+
+@keyframes slideInRibbon {
+    0% {
+        transform: translateX(-100%) rotate(-5deg); /* Start completely off-screen */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) rotate(-5deg); /* End at the left edge of the container's padding */
+        opacity: 1;
     }
 }
 
@@ -256,19 +273,23 @@ p {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
-        padding: 20px;
+        padding: 20px 20px 20px 120px; /* Significantly increased left padding for ribbon on tablets */
         width: 95%; /* Slightly wider on tablets */
         max-height: 95vh; /* Adjust max height */
+        text-align: left; /* Align content to the left */
     }
 
     h1 {
         font-size: 2.2em; /* Slightly larger for better readability */
+        /* Removed padding-left here as container padding will handle it */
+        text-align: left;
     }
 
     .ribbon {
-        top: -15px; /* Adjust ribbon position */
+        top: 15px; /* Adjust ribbon position for mobile */
+        left: 0; /* Position at the left edge of the container's padding */
         padding: 10px 25px;
-        transform: translateX(-50%) rotate(-2deg); /* Less rotation */
+        transform: translateX(0) rotate(-3deg); /* No initial translateX, animation will handle it */
     }
 
     .ribbon-content {
@@ -277,6 +298,7 @@ p {
 
     p {
         font-size: 1em;
+        text-align: left; /* Align text to the left */
     }
 
     .image-gallery {
@@ -301,17 +323,19 @@ p {
     }
 
     .container {
-        padding: 15px;
+        padding: 15px 15px 15px 100px; /* Significantly increased left padding for ribbon on small mobile */
         width: 95%; /* Maximize width on small phones */
         border-radius: 10px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         max-height: 98vh; /* Allow more height for content */
+        text-align: left; /* Align content to the left */
     }
 
     .ribbon {
-        top: -10px; /* Further adjust ribbon position */
+        top: 10px; /* Further adjust ribbon position for mobile */
+        left: 0; /* Position at the left edge of the container's padding */
         padding: 8px 20px;
-        transform: translateX(-50%) rotate(-1deg); /* Even less rotation */
+        transform: translateX(0) rotate(-1deg); /* No initial translateX, animation will handle it */
         border-width: 1px; /* Thinner border */
     }
 
@@ -324,6 +348,8 @@ p {
         font-size: 1.8em; /* Smaller heading */
         margin-bottom: 15px;
         padding-top: 20px;
+        /* Removed padding-left here as container padding will handle it */
+        text-align: left;
     }
 
     .birthday-girl-name {
@@ -333,6 +359,7 @@ p {
     p {
         font-size: 0.9em; /* Smaller paragraph text */
         margin-bottom: 10px;
+        text-align: left; /* Align text to the left */
     }
 
     .image-gallery {
